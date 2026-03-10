@@ -1,0 +1,128 @@
+---
+import Icon from './Icon.astro';
+
+const navLinks = [
+  { name: 'Start', href: '#hero' },
+  { name: 'Projekte', href: '#projects' },
+  { name: 'Kontakt', href: '#contact' },
+];
+---
+
+<nav
+  id="navbar"
+  class="fixed w-full z-50 transition-all duration-300 bg-transparent py-6"
+>
+  <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+    <a href="#" onclick="location.reload()" class="text-2xl font-bold font-mono tracking-tighter">
+      
+      <img src="/nico-lego-profile.png" alt="Nicolas Burbano" class="h-10 w-auto rounded-full" />
+
+      <!-- <span class="text-white">DNBP</span>
+      <span class="text-brand-orange">.</span>
+       -->
+    </a>
+
+    {/* Desktop Menu */}
+    <div class="hidden md:flex space-x-8">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-sm font-medium text-gray-300 hover:text-brand-blue transition-colors relative group"
+        >
+          {link.name}
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-orange transition-all group-hover:w-full"></span>
+        </a>
+      ))}
+    </div>
+
+    {/* Mobile Menu Button */}
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden text-white focus:outline-none"
+    >
+      <div id="icon-menu" class="block"><Icon name="Menu" size={24} /></div>
+      <div id="icon-close" class="hidden"><Icon name="X" size={24} /></div>
+    </button>
+  </div>
+
+  {/* Mobile Menu */}
+  <div
+    id="mobile-menu"
+    class="md:hidden bg-black border-b border-white/10 overflow-hidden transition-all duration-300"
+    style="height: 0; opacity: 0;"
+  >
+    <div class="px-6 py-4 flex flex-col space-y-4">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="mobile-link text-gray-300 hover:text-brand-orange text-lg font-medium"
+        >
+          {link.name}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  import { animate } from 'motion';
+
+  const navbar = document.getElementById('navbar');
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const iconMenu = document.getElementById('icon-menu');
+  const iconClose = document.getElementById('icon-close');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  let isOpen = false;
+
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      navbar?.classList.remove('bg-transparent', 'py-6');
+      navbar?.classList.add('bg-black/90', 'backdrop-blur-md', 'border-b', 'border-white/10', 'py-4');
+    } else {
+      navbar?.classList.add('bg-transparent', 'py-6');
+      navbar?.classList.remove('bg-black/90', 'backdrop-blur-md', 'border-b', 'border-white/10', 'py-4');
+    }
+  };
+
+  const toggleMenu = () => {
+    isOpen = !isOpen;
+    if (isOpen) {
+      iconMenu?.classList.add('hidden');
+      iconMenu?.classList.remove('block');
+      iconClose?.classList.remove('hidden');
+      iconClose?.classList.add('block');
+      
+      if (menu) {
+        // Measure exact height needed
+        menu.style.height = 'auto';
+        const height = menu.scrollHeight;
+        menu.style.height = '0px';
+        
+        animate(menu, { height: `${height}px`, opacity: 1 }, { duration: 0.3 });
+      }
+    } else {
+      iconClose?.classList.add('hidden');
+      iconClose?.classList.remove('block');
+      iconMenu?.classList.remove('hidden');
+      iconMenu?.classList.add('block');
+      
+      if (menu) {
+        animate(menu, { height: '0px', opacity: 0 }, { duration: 0.3 });
+      }
+    }
+  };
+
+  btn?.addEventListener('click', toggleMenu);
+  
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (isOpen) toggleMenu();
+    });
+  });
+
+  window.addEventListener('scroll', handleScroll);
+  // Initial check
+  handleScroll();
+</script>

@@ -1,0 +1,59 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+const projects = [
+  {
+    title: "Statische Webseite für Arztpraxis",
+    description: "",
+    tags: ["HTML", "CSS", "Github Pages", "Hostinger"],
+    video: "/arzt-praxis.mp4",
+    githubUrl: "",
+    liveUrl: "https://www.drmanuelburbano.com/"
+  },
+  {
+    title: "CityPulse Web Applikation",
+    description: "Komplette CRUD WebApp mit Auth für Veranstaltungen der Stadt Konstanz",
+    tags: ["Vue.js", "Sails.js", "MySQL"],
+    video: "/city-pulse.mp4",
+    githubUrl: "#",
+    liveUrl: "https://citypulse-webapp.onrender.com/"
+  },
+  {
+    title: "n8n Social Media Automatisierung",
+    description: "Entwicklung von einem Social Media Workflow für das automatisches Upload von Instagram Posts",
+    tags: ["n8n", "API Integration", "PostgreSQL", "Docker", "VPS"],
+    video: "https://picsum.photos/seed/supply/800/600",
+  }
+];
+---
+
+<section id="projects" class="py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-16 text-center">
+      <h2 
+        class="projects-header text-3xl md:text-4xl font-bold mb-4"
+      >
+        Relevante <span class="text-brand-orange">Projekte</span>
+      </h2>
+      <div 
+        class="projects-divider h-1 bg-brand-blue mx-auto rounded-full w-24"
+      ></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project, index) => (
+        <ProjectCard 
+          title={project.title}
+          description={project.description}
+          tags={project.tags}
+          video={project.video}
+          githubUrl={project.githubUrl}
+          liveUrl={project.liveUrl}
+          index={index} 
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+

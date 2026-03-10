@@ -1,0 +1,32 @@
+---
+import '../global.css';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import ExperienceList from '../components/ExperienceList.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/dnbp_favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Nicolas Burbano - Portfolio</title>
+	</head>
+	<body>
+		<div class="bg-black text-white min-h-screen font-sans selection:bg-brand-orange selection:text-white">
+			<Navbar />
+			<main>
+				<Hero />
+				<ExperienceList />
+				<Projects />
+				<Contact />
+			</main>
+			<Footer />
+		</div>
+	</body>
+</html>

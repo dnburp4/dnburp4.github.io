@@ -1,0 +1,38 @@
+---
+import * as icons from 'lucide';
+
+export interface Props {
+  name: keyof typeof icons;
+  size?: number | string;
+  class?: string;
+}
+
+const { name, size = 24, class: className = '', ...props } = Astro.props;
+const iconNodes = icons[name];
+
+if (!iconNodes) {
+  console.error(`[Icon] Icon "\${name}" not found`);
+}
+
+---
+
+{iconNodes ? (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class={className}
+    {...props}
+  >
+    {iconNodes.map(([Tag, attrs]) => {
+      // @ts-ignore
+      return <Tag {...attrs} />;
+    })}
+  </svg>
+) : null}

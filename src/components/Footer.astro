@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+---
+
+<footer class="bg-black border-t border-white/10 py-12">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="text-center md:text-left flex flex-col">
+      <a href="#" onclick="location.reload()" class="self-center md:self-start">
+        <img src="/dnbp_favicon.svg" alt="logo" class="mb-2 block h-24 w-auto hover:opacity-80 transition-opacity">
+      </a>
+      <p class="text-gray-500 text-sm">
+        © {new Date().getFullYear()} Nicolas Burbano. All rights reserved.
+      </p>
+    </div>
+
+    <div class="flex gap-6">
+      <a href="https://github.com/dnburp4" class="text-gray-500 hover:text-white transition-colors">
+        <Icon name="Github" size={20} />
+      </a>
+      <a href="https://www.linkedin.com/in/dnicolasburbanop/" class="text-gray-500 hover:text-white transition-colors">
+        <Icon name="Linkedin" size={20} />
+      </a>
+    </div>
+  </div>
+</footer>
